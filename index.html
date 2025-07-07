@@ -1,11 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PetFinder</title>
-</head>
-<body>
-    
-</body>
+
+    <!-- DaisyUI CDN LINK -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- CSS STYLE SHEET LINK -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- HEADER SECTION STARTS -->
+    <header>
+      <nav>
+        <div class="navbar my-7 w-11/12 md:w-10/12 mx-auto">
+          <div class="navbar-start">
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+              </div>
+              <ul
+                tabindex="0"
+                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              >
+                <li><a>Home</a></li>
+                <li><a>Shop</a></li>
+                <li><a>Contact</a></li
+              </ul>
+            </div>
+            <img class="ml-4 w-6 h-6 md:w-7 md:h-7" src="images/logo.webp" alt="">
+            <a class="btn btn-ghost text-3xl font-bold font-mono">PetFinder</a>
+          </div>
+          <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1 gap-5 text-gray-600">
+              <li><a>Home</a></li>
+              <li><a>Shop</a></li>
+              <li><a>Contact</a></li>
+            </ul>
+          </div>
+          <div class="navbar-end">
+            <img class="w-12 h-12 border-1 border-gray-300 rounded-full p-3 " src="https://img.icons8.com/?size=100&id=WNS8XGkd1Rhp&format=png&color=000000" alt="">
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- HEADER SECTION ENDS -->
+
+    <!-- MAIN SECTION STARTS -->
+    <main></main>
+    <!-- MAIN SECTION ENDS -->
+
+    <!-- FOOTER SECTION STARTS -->
+
+    <footer></footer>
+
+    <!-- FOOTER SECTION ENDS -->
+
+    <!-- JS FILE LINK HERE -->
+    <script src="js/pet.js"></script>
+  </body>
 </html>
