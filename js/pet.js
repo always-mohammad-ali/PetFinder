@@ -15,7 +15,7 @@ const displayFetchCategoryButton = (data) =>{
         const categorizeDiv = document.createElement("div");
         categorizeDiv.classList.add('flex', 'items-center', 'gap-3', 'my-3')
         categorizeDiv.innerHTML = `
-        <button onclick="categorilyPetLoad('${id.category}')" class="px-13 btn  rounded-3xl py-6 flex flex-row gap-3 active-bg">
+        <button id="btn-${id.category}" onclick="categorilyPetLoad('${id.category}')" class="btn px-13 rounded-3xl py-6 flex flex-row gap-3 btn-style">
           <img class="w-8 h-8" src="${id.category_icon}"/>
           <h3 class="text-lg font-bold">${id.category}</h3>
         </button>
@@ -31,10 +31,25 @@ const displayFetchCategoryButton = (data) =>{
 const categorilyPetLoad = (categoryName) =>{
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
     .then(res => res.json())
-    .then(data => displayPets(data.data))
+    .then(data => {
+         removeActiveBgClassName();
+
+         const activeBtn = document.getElementById(`btn-${categoryName}`)
+         activeBtn.classList.add('active-bg')
+
+        displayPets(data.data)
+    })
     .catch(err => console.error(err))
 }
 categorilyPetLoad()
+
+const removeActiveBgClassName = () =>{
+    const btnStyle = document.getElementsByClassName('btn-style')
+    
+    for(let buttonStyle of btnStyle){
+        buttonStyle.classList.remove('active-bg')
+    }
+}
 
 
 const loadDisplayPets = () =>{
