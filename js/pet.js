@@ -9,13 +9,13 @@ fetchCategoryButton()
 
 const displayFetchCategoryButton = (data) =>{
     const categorizeSection = document.getElementById('categorize-section')
-
+       console.log(data)
     data.forEach(id =>{
-        console.log(id);
+        console.log(id.category);
         const categorizeDiv = document.createElement("div");
         categorizeDiv.classList.add('flex', 'items-center', 'gap-3', 'my-3')
         categorizeDiv.innerHTML = `
-        <button class="px-12 rounded-3xl py-3 flex flex-row gap-3 ">
+        <button onclick="categorilyPetLoad('${id.category}')" class="px-13 btn  rounded-3xl py-6 flex flex-row gap-3 active-bg">
           <img class="w-8 h-8" src="${id.category_icon}"/>
           <h3 class="text-lg font-bold">${id.category}</h3>
         </button>
@@ -25,6 +25,17 @@ const displayFetchCategoryButton = (data) =>{
    
 
 }
+
+// VIDEO LOAD CATEGORIZE SYSTEMATICALLY
+
+const categorilyPetLoad = (categoryName) =>{
+    fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
+    .then(res => res.json())
+    .then(data => displayPets(data.data))
+    .catch(err => console.error(err))
+}
+categorilyPetLoad()
+
 
 const loadDisplayPets = () =>{
      fetch('https://openapi.programming-hero.com/api/peddy/pets')
@@ -37,6 +48,7 @@ loadDisplayPets();
 const displayPets = (pets) =>{
     const allPet = document.getElementById('all-pet')
 
+    allPet.innerHTML = "";
     console.log(pets)
 
     pets.forEach(pet =>{
@@ -45,9 +57,11 @@ const displayPets = (pets) =>{
 
         petCard.innerHTML = `
         <div class="card w-65 mx-auto p-3 border-1 border-gray-300 rounded-xl">
-
+         
+        
            <img class="w-full h-full rounded-xl" src="${pet.image}" />
            <h3 class="text-xl font-bold my-2">${pet.pet_name}</h3>
+        
 
            <p class="flex gap-2 items-center text-gray-600 "><img class="w-6 h-6 " src="https://img.icons8.com/?size=100&id=Zkm9nD_HFSMJ&format=png&color=000000"/>Breed: ${pet.breed}</p>
 
@@ -79,3 +93,6 @@ const displayPets = (pets) =>{
 function scrollToCategory() {
        document.getElementById('categorize-section').scrollIntoView({behavior : 'smooth'});
 }
+
+
+
