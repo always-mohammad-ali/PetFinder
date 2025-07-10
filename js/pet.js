@@ -113,7 +113,7 @@ const displayPets = (pets) =>{
                    <img class="w-8 h-8" src="https://img.icons8.com/?size=100&id=U6uSXVbuA1xU&format=png&color=000000" /> 
               </button>
               <button class="btn btn-sm text-[#0E7A81] font-bold">Adopt</button>
-              <button class="btn btn-sm text-[#0E7A81] font-bold">Details</button>
+              <button onclick="loadPetDetails('${pet.petId}')" class="btn btn-sm text-[#0E7A81] font-bold">Details</button>
            </div>
         </div>
 
@@ -121,6 +121,44 @@ const displayPets = (pets) =>{
         `
         allPet.append(petCard)
     })
+}
+
+// LOAD PET DETAILS THROUGH FETCH API ONE BY ONE
+
+const loadPetDetails = (petId) =>{
+    fetch(`http://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+    .then(res => res.json())
+    .then(data => displayPetDetails(data.petData))
+    .catch(err => console.error(err))
+}
+loadPetDetails();
+
+const displayPetDetails = (petDetails) =>{
+    const modalContent = document.getElementById('modal-content')
+
+    modalContent.innerHTML = `
+        <div>
+            <img class="w-full" src="${petDetails.image}" />
+            <h2 class="text-xl font-bold text-[#0E7A81] my-3">${petDetails.pet_name}</h2>
+
+        <div class="grid grid-cols-2 grid-rows-3">
+            <p class="flex gap-2 items-center text-gray-600 text-xs"><img class="w-6 h-6 " src="https://img.icons8.com/?size=100&id=Zkm9nD_HFSMJ&format=png&color=000000"/>Breed: ${petDetails.breed}</p>
+
+           <p class="flex gap-2 items-center text-gray-600  text-xs"><img class="w-6 h-6 " src="https://img.icons8.com/?size=100&id=60611&format=png&color=000000"/> Birth: ${petDetails.date_of_birth}</p>
+
+           <p class="flex gap-2 items-center text-gray-600  text-xs"><img class="w-6 h-6 " src="https://img.icons8.com/?size=100&id=11780&format=png&color=000000"/> Gender: ${petDetails.gender}</p>
+
+           <p class="flex gap-2 items-center text-gray-600   text-xs"><img class="w-6 h-6 " src="https://img.icons8.com/?size=100&id=85782&format=png&color=000000"/> Price: ${petDetails.price}</p>
+
+           <p class="flex gap-2 items-center text-gray-600  text-xs"><img class="w-6 h-6 " src="https://img.icons8.com/?size=100&id=962&format=png&color=000000"/> Vaccinated Status: ${petDetails.vaccinated_status}</p>
+        </div>
+
+        <h3 class="text-xl font-bold text-[#0E7A81] my-3">Details Information: </h3>
+        <ul class="text-gray-500 ">${petDetails.pet_details}</ul>
+        </div>
+    `
+
+    document.getElementById('customModal').showModal();
 }
 
 
