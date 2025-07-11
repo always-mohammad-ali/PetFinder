@@ -128,7 +128,7 @@ const displayPets = (pets) =>{
          }, 1502);
 
         petCard.innerHTML = `
-        <div class="card w-65 mx-auto p-3 border-1 border-gray-300 rounded-xl">
+        <div class="card w-5/6 mx-auto p-3 border-1 border-gray-300 rounded-xl">
          
         
            <img class="w-full h-full rounded-xl" src="${pet.image}" />
@@ -208,3 +208,4 @@ function scrollToCategory() {
 
 
 
+// END SIRE!
