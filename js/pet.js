@@ -15,15 +15,37 @@ const displayFetchCategoryButton = (data) =>{
         const categorizeDiv = document.createElement("div");
         categorizeDiv.classList.add('flex', 'items-center', 'gap-3', 'my-3')
         categorizeDiv.innerHTML = `
-        <button id="btn-${id.category}" onclick="categorilyPetLoad('${id.category}')" class="btn px-13 rounded-3xl py-6 flex flex-row gap-3 btn-style">
+        <button id="btn-${id.category}" onclick="loadingSpinner('${id.category}') ; categorilyPetLoad('${id.category}')" class="btn px-13 rounded-3xl py-6 flex flex-row gap-3 btn-style">
           <img class="w-8 h-8" src="${id.category_icon}"/>
           <h3 class="text-lg font-bold">${id.category}</h3>
         </button>
+
+        
+        <!-- LOADING SPINNER  -->
+       <div id="loading-spinner" class="hidden absolute left-50 md:left-110 lg:left-180 mt-80 md:mt-40">
+         <span class="loading loading-spinner loading-xl text-[#0E7A81]"></span>
+       </div>
+    
+
+        
         `
          categorizeSection.append(categorizeDiv);
     })
    
 
+}
+
+// LOADING SPINNER FUNCTION 
+function loadingSpinner(spin) {
+     const loadSpinner = document.getElementById("loading-spinner")
+
+     loadSpinner.classList.remove("hidden")
+
+     setTimeout(() => {
+        console.log('loading', spin);
+
+        loadSpinner.classList.add("hidden");
+     }, 1500);
 }
 
 // VIDEO LOAD CATEGORIZE SYSTEMATICALLY
@@ -36,6 +58,8 @@ const categorilyPetLoad = (categoryName) =>{
 
          const activeBtn = document.getElementById(`btn-${categoryName}`)
          activeBtn.classList.add('active-bg')
+
+         
 
         displayPets(data.data)
     })
@@ -62,12 +86,20 @@ loadDisplayPets();
 
 const displayPets = (pets) =>{
     const allPet = document.getElementById('all-pet')
+    
+    
+
     allPet.innerHTML = "";
 
      if(pets.length == 0){
         allPet.classList.remove('grid');
+        allPet.classList.add("hidden")
+        setTimeout(() => {
+            allPet.classList.remove("hidden")
+        }, 1502);
         
         allPet.classList.add('mx-auto', 'items-center', 'flex', 'flex-col')
+        
         allPet.innerHTML = `
           <img class="mt-30 mb-2" src="../images/error.webp" />
           <h1 class="text-2xl font-bold mb-1"> No Information Available </h1>
@@ -89,7 +121,11 @@ const displayPets = (pets) =>{
 
        
         const petCard = document.createElement('div')
-        petCard.classList.add('flex', 'flex-row')
+        petCard.classList.add('flex', 'flex-row', "hidden")
+    
+        setTimeout(() => {
+            petCard.classList.add("inline")
+         }, 1502);
 
         petCard.innerHTML = `
         <div class="card w-65 mx-auto p-3 border-1 border-gray-300 rounded-xl">
@@ -122,6 +158,8 @@ const displayPets = (pets) =>{
         allPet.append(petCard)
     })
 }
+
+
 
 // LOAD PET DETAILS THROUGH FETCH API ONE BY ONE
 
